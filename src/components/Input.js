@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export function Input(props) {
-  return <StyledInput />;
+  return <StyledInput {...props} />;
 }
 
 const StyledInput = styled.input`
@@ -14,6 +14,11 @@ const StyledInput = styled.input`
   color: #f5f5f5;
   outline: none;
   text-overflow: ellipsis;
+  font-size: 16px;
+
+  &::placeholder {
+    color: #b3b3b3;
+  }
 
   &:hover,
   &:focus {
