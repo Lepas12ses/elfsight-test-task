@@ -8,5 +8,4 @@ const StyledContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: fit-content;
 `;

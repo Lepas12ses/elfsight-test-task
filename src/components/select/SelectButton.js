@@ -36,8 +36,6 @@ export function SelectButton() {
 const StyledButton = styled.button`
   background: ${({ _isExpanded }) => (_isExpanded ? '#334466' : '#263750')};
   border: 1px solid #83bf46;
-  min-width: 240px;
-  width: fit-content;
   padding: 12px 16px;
   border-radius: 8px;
   color: #f5f5f5;
