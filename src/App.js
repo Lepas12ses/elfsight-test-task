@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Pagination, ItemsGrid, useData, Header, AppState } from './components';
-import { Input } from './components/Input';
 
 export function App() {
   const { isFetching, isError } = useData();
