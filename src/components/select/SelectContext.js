@@ -7,7 +7,8 @@ export const SelectContext = createContext({
   renderItem: () => {},
   toggle: () => {},
   close: () => {},
-  onSelect: () => {}
+  onSelect: () => {},
+  placeholder: 'Select'
 });
 
 export function useSelectContext() {

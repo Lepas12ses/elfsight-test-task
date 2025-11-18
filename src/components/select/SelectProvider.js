@@ -6,7 +6,8 @@ export function SelectProvider({
   selectedItem = null,
   items = [],
   renderItem = () => {},
-  onSelect = () => {}
+  onSelect = () => {},
+  placeholder
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -33,7 +34,8 @@ export function SelectProvider({
     renderItem,
     toggle,
     close,
-    onSelect: handleSelect
+    onSelect: handleSelect,
+    placeholder
   };
 
   return (

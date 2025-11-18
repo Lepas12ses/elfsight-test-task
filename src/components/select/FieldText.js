@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+import { useSelectContext } from './SelectContext';
 
 export function FieldText({ children }) {
+  const { placeholder } = useSelectContext();
+
   return (
     <StyledSpan _isPlaceholder={!children}>
-      {children ? children : 'Select'}
+      {children ? children : placeholder}
     </StyledSpan>
   );
 }

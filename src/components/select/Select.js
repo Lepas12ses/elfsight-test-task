@@ -7,7 +7,8 @@ export function Select({
   items,
   selectedItem = null,
   renderItem = () => {},
-  onSelect = () => {}
+  onSelect = () => {},
+  placeholder = 'Select'
 }) {
   return (
     <SelectProvider
@@ -15,6 +16,7 @@ export function Select({
       onSelect={onSelect}
       selectedItem={selectedItem}
       items={items}
+      placeholder={placeholder}
     >
       <SelectContainer>
         <SelectButton />
