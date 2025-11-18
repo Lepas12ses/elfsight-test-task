@@ -34,6 +34,8 @@ const StyledContainer = styled.div`
   background: #fff;
   box-shadow: 0 1px 4px 0 #0c0c0d0d, 0 1px 4px 0 #0c0c0d1a;
   z-index: 100;
+  max-height: 150px;
+  overflow-y: auto;
 `;
 
 const StyledButton = styled.button`
@@ -41,10 +43,10 @@ const StyledButton = styled.button`
   background: none;
   outline: none;
   border: none;
-  padding: 6px 7px;
   text-align: left;
   cursor: pointer;
   font-size: 16px;
+  height: 30px;
 
   @media only screen and (hover: hover) and (pointer: fine) {
     &:hover {
