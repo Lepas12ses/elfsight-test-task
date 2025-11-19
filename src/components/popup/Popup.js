@@ -2,8 +2,12 @@ import styled, { css } from 'styled-components';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
 import { PopupInfo } from './PopupInfo';
+import { useEffect } from 'react';
+import { useScrollLock } from '../../hooks/useScrollLock';
 
 export function Popup({ settings: { visible, content = {} }, setSettings }) {
+  const { lock, unlock } = useScrollLock();
+
   const {
     name,
     gender,
@@ -26,6 +30,14 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
       visible: !prevState.visible
     }));
   }
+
+  useEffect(() => {
+    if (visible) {
+      lock();
+    } else {
+      unlock();
+    }
+  }, [lock, unlock, visible]);
 
   return (
     <PopupContainer onClick={togglePopup} visible={visible}>
