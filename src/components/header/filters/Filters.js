@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Select } from '../../select';
 import { Input } from '../../Input';
 import { Button } from '../../Button';
+import { useData } from '../../providers/DataProvider';
 
 export function Filters() {
   return (
