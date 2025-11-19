@@ -1,8 +1,9 @@
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-export function Input(props) {
+export const Input = forwardRef((props, ref) => {
   return <StyledInput {...props} />;
-}
+});
 
 const StyledInput = styled.input`
   background: #263750;
