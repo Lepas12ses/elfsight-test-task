@@ -1,15 +1,16 @@
 import styled from 'styled-components';
+
 import { Select } from '../../select';
 import { Input } from '../../Input';
 import { Button } from '../../Button';
-import { useData } from '../../providers/DataProvider';
+import { GENDER, SPECIES, STATUS } from './consts';
 
 export function Filters() {
   return (
     <StyledContainer>
-      <Select placeholder="Status" />
-      <Select placeholder="Gender" />
-      <Select placeholder="Species" />
+      <Select items={STATUS} placeholder="Status" />
+      <Select items={GENDER} placeholder="Gender" />
+      <Select items={SPECIES} placeholder="Species" />
       <Input placeholder="Name" />
       <Input placeholder="Type" />
       <StyledControls>

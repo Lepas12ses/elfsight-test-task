@@ -7,14 +7,17 @@ export function useClickOutside(fn = () => {}) {
     if (!ref.current) return;
 
     function onClick(e) {
-      if (e.target.contains(ref.current)) {
+      if (!ref.current.contains(e.target)) {
         fn();
       }
     }
 
-    document.addEventListener('click', onClick);
+    const timer = setTimeout(() => {
+      document.addEventListener('click', onClick);
+    });
 
     return () => {
+      clearTimeout(timer);
       document.removeEventListener('click', onClick);
     };
   }, [fn]);
