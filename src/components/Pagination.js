@@ -4,22 +4,15 @@ import { useData } from './providers';
 
 export function Pagination() {
   const [pages, setPages] = useState([]);
-  const { apiURL, info, activePage, setActivePage, setApiURL } = useData();
+  const { apiURL, info, activePage, setActivePage } = useData();
 
   const pageClickHandler = (index) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActivePage(index);
-    setApiURL(pages[index]);
   };
 
   useEffect(() => {
-    const createdPages = Array.from({ length: info.pages }, (_, i) => {
-      const URLWithPage = new URL(apiURL);
-
-      URLWithPage.searchParams.set('page', i + 1);
-
-      return URLWithPage;
-    });
+    const createdPages = Array.from({ length: info.pages }, (_, i) => i + 1);
 
     setPages(createdPages);
   }, [apiURL, info]);

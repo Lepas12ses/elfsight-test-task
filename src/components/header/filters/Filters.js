@@ -6,9 +6,11 @@ import { Input } from '../../Input';
 import { Button } from '../../Button';
 import { GENDER, SPECIES, STATUS } from './consts';
 import { useFilters } from '../../../hooks/useFilters';
+import { useData } from '../../providers';
 
 export function Filters() {
   const { filters, setFilters } = useFilters();
+  const { setFilters: setDataFilters } = useData();
 
   const [status, setStatus] = useState(null);
   const [gender, setGender] = useState(null);
@@ -45,12 +47,21 @@ export function Filters() {
     setSpecies(filters.species ?? null);
     nameRef.current.value = filters.name ?? '';
     typeRef.current.value = filters.type ?? '';
+
+    setDataFilters(
+      filters.status,
+      filters.gender,
+      filters.species,
+      filters.name,
+      filters.type
+    );
   }, [
     filters.gender,
     filters.name,
     filters.species,
     filters.status,
-    filters.type
+    filters.type,
+    setDataFilters
   ]);
 
   return (

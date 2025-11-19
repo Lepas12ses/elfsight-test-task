@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import {
   createContext,
   useCallback,
@@ -17,6 +18,27 @@ export function DataProvider({ children }) {
   const [isError, setIsError] = useState(false);
   const [info, setInfo] = useState({});
   const [apiURL, setApiURL] = useState(API_URL);
+  const [filters, setFilters] = useState(null);
+
+  const handleSetFilters = useCallback(
+    (status, gender, species, name, type) => {
+      setActivePage(0);
+
+      if (!status && !gender && !species && !name && !type) {
+        setFilters(null);
+
+        return;
+      }
+      setFilters({
+        status,
+        gender,
+        species,
+        name,
+        type
+      });
+    },
+    []
+  );
 
   const fetchData = useCallback(async (url) => {
     setIsFetching(true);
@@ -37,8 +59,24 @@ export function DataProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    fetchData(apiURL);
-  }, [apiURL, fetchData]);
+    let url = apiURL;
+
+    url += `?page=${activePage + 1}`;
+
+    if (filters) {
+      let params = '';
+
+      if (filters.status) params += `&status=${filters.status}`;
+      if (filters.gender) params += `&gender=${filters.gender}`;
+      if (filters.species) params += `&species=${filters.species}`;
+      if (filters.name) params += `&name=${filters.name}`;
+      if (filters.type) params += `&type=${filters.type}`;
+
+      url += params;
+    }
+
+    fetchData(url);
+  }, [activePage, apiURL, fetchData, filters]);
 
   const dataValue = useMemo(
     () => ({
@@ -46,13 +84,23 @@ export function DataProvider({ children }) {
       setActivePage,
       apiURL,
       setApiURL,
+      setFilters: handleSetFilters,
       characters,
       fetchData,
       isFetching,
       isError,
       info
     }),
-    [activePage, apiURL, characters, isFetching, isError, info, fetchData]
+    [
+      activePage,
+      apiURL,
+      handleSetFilters,
+      characters,
+      fetchData,
+      isFetching,
+      isError,
+      info
+    ]
   );
 
   return (
