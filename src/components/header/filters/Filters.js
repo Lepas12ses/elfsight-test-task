@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useRef, useState } from 'react';
 
 import { Select } from '../../select';
 import { Input } from '../../Input';
@@ -6,18 +7,62 @@ import { Button } from '../../Button';
 import { GENDER, SPECIES, STATUS } from './consts';
 
 export function Filters() {
+  const [status, setStatus] = useState(null);
+  const [gender, setGender] = useState(null);
+  const [species, setSpecies] = useState(null);
+  const nameRef = useRef();
+  const typeRef = useRef();
+
+  function handleApply() {
+    const name = nameRef.current.value;
+    const type = typeRef.current.value;
+
+    const filters = {
+      status,
+      gender,
+      species,
+      name: name.length ? name : null,
+      type: type.length ? type : null
+    };
+  }
+
+  function handleReset() {
+    setStatus(null);
+    setGender(null);
+    setSpecies(null);
+    nameRef.current.value = '';
+    typeRef.current.value = '';
+
+    handleApply();
+  }
+
   return (
     <StyledContainer>
-      <Select items={STATUS} placeholder="Status" />
-      <Select items={GENDER} placeholder="Gender" />
-      <Select items={SPECIES} placeholder="Species" />
-      <Input placeholder="Name" />
-      <Input placeholder="Type" />
+      <Select
+        onSelect={setStatus}
+        selectedItem={status}
+        items={STATUS}
+        placeholder="Status"
+      />
+      <Select
+        onSelect={setGender}
+        selectedItem={gender}
+        items={GENDER}
+        placeholder="Gender"
+      />
+      <Select
+        onSelect={setSpecies}
+        selectedItem={species}
+        items={SPECIES}
+        placeholder="Species"
+      />
+      <Input ref={nameRef} placeholder="Name" />
+      <Input ref={typeRef} placeholder="Type" />
       <StyledControls>
-        <Button width="100%" color="#83BF46">
+        <Button onClick={handleApply} width="100%" color="#83BF46">
           Apply
         </Button>
-        <Button width="100%" color="#FF5152">
+        <Button onClick={handleReset} width="100%" color="#FF5152">
           Reset
         </Button>
       </StyledControls>

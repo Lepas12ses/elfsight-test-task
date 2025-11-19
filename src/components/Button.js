@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export function Button({ children, color, width }) {
+export function Button({ children, color, width, ...props }) {
   return (
-    <StyledButton _width={width} _color={color}>
+    <StyledButton _width={width} _color={color} {...props}>
       {children}
     </StyledButton>
   );
