@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 export const Input = forwardRef((props, ref) => {
-  return <StyledInput {...props} />;
+  return <StyledInput ref={ref} {...props} />;
 });
 
 const StyledInput = styled.input`
