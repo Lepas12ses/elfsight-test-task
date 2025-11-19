@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Select } from '../../select';
 import { Input } from '../../Input';
@@ -18,7 +18,7 @@ export function Filters() {
   const nameRef = useRef();
   const typeRef = useRef();
 
-  function handleApply() {
+  const handleApply = useCallback(() => {
     const name = nameRef.current.value;
     const type = typeRef.current.value;
 
@@ -29,9 +29,9 @@ export function Filters() {
       name.length ? name : null,
       type.length ? type : null
     );
-  }
+  }, [gender, setFilters, species, status]);
 
-  function handleReset() {
+  const handleReset = useCallback(() => {
     setStatus(null);
     setGender(null);
     setSpecies(null);
@@ -39,7 +39,7 @@ export function Filters() {
     typeRef.current.value = '';
 
     setFilters(null, null, null, null, null);
-  }
+  }, [setFilters]);
 
   useEffect(() => {
     setStatus(filters.status ?? null);

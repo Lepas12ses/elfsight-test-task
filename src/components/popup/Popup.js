@@ -30,16 +30,19 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
 
   useKeyPress('Escape', closePopup);
 
-  function togglePopup(e) {
-    if (e.currentTarget !== e.target) {
-      return;
-    }
+  const togglePopup = useCallback(
+    (e) => {
+      if (e.currentTarget !== e.target) {
+        return;
+      }
 
-    setSettings((prevState) => ({
-      ...prevState,
-      visible: !prevState.visible
-    }));
-  }
+      setSettings((prevState) => ({
+        ...prevState,
+        visible: !prevState.visible
+      }));
+    },
+    [setSettings]
+  );
 
   useEffect(() => {
     if (visible) {

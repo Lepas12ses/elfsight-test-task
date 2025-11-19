@@ -3,6 +3,7 @@ import { useSelectContext } from './SelectContext';
 import { FieldText } from './FieldText';
 import { CrossButton } from './CrossButton';
 import { ArrowButton } from './ArrowButton';
+import { useCallback } from 'react';
 
 export function SelectButton() {
   const {
@@ -15,11 +16,14 @@ export function SelectButton() {
 
   const isSelected = selectedItem !== null;
 
-  function crossClick(e) {
-    e.stopPropagation();
+  const crossClick = useCallback(
+    (e) => {
+      e.stopPropagation();
 
-    onSelect(null);
-  }
+      onSelect(null);
+    },
+    [onSelect]
+  );
 
   return (
     <StyledButton _isExpanded={isExpanded} onClick={toggle}>

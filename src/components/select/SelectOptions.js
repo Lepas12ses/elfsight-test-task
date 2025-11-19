@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useSelectContext } from './SelectContext';
 import { useClickOutside } from '../../hooks/useClickOutside';
+import { useCallback } from 'react';
 
 export function SelectOptions() {
   const { isExpanded } = useSelectContext();
@@ -14,10 +15,14 @@ function Content() {
   const { items, renderItem, onSelect, close } = useSelectContext();
   const containerRef = useClickOutside(close);
 
+  const getSelectHandler = useCallback((item) => onSelect.bind(null, item), [
+    onSelect
+  ]);
+
   return (
     <StyledContainer ref={containerRef}>
       {items.map((item) => (
-        <StyledButton key={item} onClick={() => onSelect(item)}>
+        <StyledButton key={item} onClick={getSelectHandler(item)}>
           {renderItem(item)}
         </StyledButton>
       ))}
