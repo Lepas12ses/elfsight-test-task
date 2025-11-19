@@ -2,8 +2,9 @@ import styled, { css } from 'styled-components';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
 import { PopupInfo } from './PopupInfo';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useScrollLock } from '../../hooks/useScrollLock';
+import { useKeyPress } from '../../hooks/useKeyPress';
 
 export function Popup({ settings: { visible, content = {} }, setSettings }) {
   const { lock, unlock } = useScrollLock();
@@ -19,6 +20,15 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     location,
     episode: episodes
   } = content;
+
+  const closePopup = useCallback(() => {
+    setSettings((prevState) => ({
+      ...prevState,
+      visible: false
+    }));
+  }, [setSettings]);
+
+  useKeyPress('Escape', closePopup);
 
   function togglePopup(e) {
     if (e.currentTarget !== e.target) {
