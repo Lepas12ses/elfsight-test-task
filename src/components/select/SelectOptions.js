@@ -47,6 +47,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   font-size: 16px;
   height: 30px;
+  padding: 0 7px;
 
   @media only screen and (hover: hover) and (pointer: fine) {
     &:hover {

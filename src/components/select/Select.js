@@ -6,7 +6,7 @@ import { SelectOptions } from './SelectOptions';
 export function Select({
   items,
   selectedItem = null,
-  renderItem = () => {},
+  renderItem = (item) => item,
   onSelect = () => {},
   placeholder = 'Select'
 }) {
