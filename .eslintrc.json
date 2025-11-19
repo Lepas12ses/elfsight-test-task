@@ -6,7 +6,6 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "linebreak-style": "off",
     "react/prop-types": "off",
     "react/display-name": "off",
     "default-param-last": "error",
