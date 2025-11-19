@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-import { Pagination, ItemsGrid, useData, Header, AppState } from '..';
+import {
+  Pagination,
+  ItemsGrid,
+  useData,
+  Header,
+  AppState
+} from '../components';
 
 export function HomePage() {
   const { isFetching, isError } = useData();

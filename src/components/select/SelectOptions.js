@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useSelectContext } from './SelectContext';
-import { useClickOutside } from '../hooks/useClickOutside';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 export function SelectOptions() {
   const { isExpanded } = useSelectContext();

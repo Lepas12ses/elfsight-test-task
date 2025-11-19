@@ -1,12 +1,15 @@
 import styled from 'styled-components';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Select } from '../../select';
 import { Input } from '../../Input';
 import { Button } from '../../Button';
 import { GENDER, SPECIES, STATUS } from './consts';
+import { useFilters } from '../../../hooks/useFilters';
 
 export function Filters() {
+  const { filters, setFilters } = useFilters();
+
   const [status, setStatus] = useState(null);
   const [gender, setGender] = useState(null);
   const [species, setSpecies] = useState(null);
@@ -17,13 +20,13 @@ export function Filters() {
     const name = nameRef.current.value;
     const type = typeRef.current.value;
 
-    const filters = {
+    setFilters(
       status,
       gender,
       species,
-      name: name.length ? name : null,
-      type: type.length ? type : null
-    };
+      name.length ? name : null,
+      type.length ? type : null
+    );
   }
 
   function handleReset() {
@@ -33,8 +36,22 @@ export function Filters() {
     nameRef.current.value = '';
     typeRef.current.value = '';
 
-    handleApply();
+    setFilters(null, null, null, null, null);
   }
+
+  useEffect(() => {
+    setStatus(filters.status ?? null);
+    setGender(filters.gender ?? null);
+    setSpecies(filters.species ?? null);
+    nameRef.current.value = filters.name ?? '';
+    typeRef.current.value = filters.type ?? '';
+  }, [
+    filters.gender,
+    filters.name,
+    filters.species,
+    filters.status,
+    filters.type
+  ]);
 
   return (
     <StyledContainer>
